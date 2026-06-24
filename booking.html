@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking & Contact | Almac & Sons Vehicle Services</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/png" href="assets/images/favicon-16x16.png">
+</head>
+<body>
+
+<header class="navbar">
+  <h1>Almac & Sons Vehicle Services</h1>
+  <input type="checkbox" id="menu-checkbox" hidden>
+  <label for="menu-checkbox" class="menu-toggle">☰</label>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="booking.html">Booking & Contact</a></li>
+  </ul>
+</header>
+
+<main>
+  <h2>Book an Appointment</h2>
+  <p>Please fill out the form below to schedule your appointment.</p>
+  <p>If we can't accommodate your preferred booking, a member of staff will contact you to re-schedule.</p>
+
+  <div class="booking-content">
+
+    <form class="booking-form" action="thank-you.html" method="get">
+
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required minlength="3">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="vehicle-reg">Registration Number</label>
+        <input type="text" id="vehicle-reg" name="reg" placeholder="e.g. AB12 CDE">
+      </div>
+
+      <div class="form-group">
+        <label for="vehicle-make">Vehicle Make</label>
+        <input type="text" id="vehicle-make" name="make" placeholder="e.g. Ford">
+      </div>
+
+      <div class="form-group">
+        <label for="vehicle-model">Vehicle Model</label>
+        <input type="text" id="vehicle-model" name="model" placeholder="e.g. Focus">
+      </div>
+
+      <div class="form-group">
+        <label for="vehicle-year">Year</label>
+        <input type="text" id="vehicle-year" name="year" placeholder="e.g. 2019">
+      </div>
+
+      <div class="form-group">
+        <label for="service">Service Required *</label>
+        <select id="service" name="service" required>
+          <option value="">-- Select Service --</option>
+          <option value="MOT">MOT</option>
+          <option value="Servicing">Servicing</option>
+          <option value="Repair">Repair</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Preferred Date *</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit">Submit Booking</button>
+        <button type="reset">Clear Form</button>
+      </div>
+    </form>
+
+    <div class="booking-image">
+  <img
+    src="assets/images/male-customer-auto-service-center-explaning-problems-his-car-mechanic-with-clipboard.jpg"
+    alt="Customer vehicle being inspected"
+    class="page-image"
+  >
+</div>
+</div>
+
+<section class="contact-details">
+  <h2>Contact Details</h2>
+  <p><strong>Phone:</strong> 01234 567890</p>
+  <p><strong>Email:</strong> info@almacandsons.co.uk</p>
+  <p><strong>Address:</strong> Example Garage Address</p>
+</section>
+
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-left">
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">X</a>
+  </div>
+
+  <div class="footer-center">
+    <p>&copy; 2026 Almac & Sons Vehicle Services</p>
+  </div>
+
+  <div class="footer-right">
+    <img src="assets/images/5356237.jpg" alt="Car logo" class="footer-logo">
+  </div>
+
+  <div class="footer-credits">
+    Images courtesy of
+    <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">Unsplash</a>
+    and
+    <a href="https://www.freepik.com/" target="_blank" rel="noopener noreferrer">Freepik</a>.
+    Favicon from
+    <a href="https://favicon.io/" target="_blank" rel="noopener noreferrer">favicon.io</a>.
+  </div>
+</footer>
+
+<script>
+/* ==========================
+   AUTO-FILL VEHICLE DETAILS
+========================== */
+const params = new URLSearchParams(window.location.search);
+
+const reg = params.get("reg");
+const make = params.get("make");
+const model = params.get("model");
+const year = params.get("year");
+
+const regField = document.getElementById("vehicle-reg");
+const makeField = document.getElementById("vehicle-make");
+const modelField = document.getElementById("vehicle-model");
+const yearField = document.getElementById("vehicle-year");
+
+if (reg && regField) regField.value = reg;
+if (make && makeField) makeField.value = make;
+if (model && modelField) modelField.value = model;
+if (year && yearField) yearField.value = year;
+</script>
+
+<script>
+/* ==========================
+   PREVENT PAST DATE CHOICE
+========================== */
+const dateInput = document.getElementById("date");
+const today = new Date().toISOString().split("T")[0];
+dateInput.setAttribute("min", today);
+</script>
+
+</body>
+</html>
