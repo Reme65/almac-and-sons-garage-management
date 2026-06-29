@@ -15,9 +15,9 @@
   <input type="checkbox" id="menu-checkbox" style="display:none;">
   <label for="menu-checkbox" class="menu-toggle">☰</label>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="booking.html">Booking & Contact</a></li>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'services' %}">Services</a></li>
+    <li><a href="{% url 'booking' %}">Booking & Contact</a></li>
   </ul>
 </header>
 

@@ -1,11 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thank You | Almac & Sons Vehicle Services</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="icon" type="image/png" href="assets/images/favicon-16x16.png">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
 </head>
 <body>
 
@@ -14,9 +15,9 @@
     <input type="checkbox" id="menu-checkbox" hidden>
     <label for="menu-checkbox" class="menu-toggle">☰</label>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="booking.html">Booking & Contact</a></li>
+      <li><a href="{% url 'services' %}">Services</a></li>
+      <li><a href="{% url 'booking' %}">Booking</a></li>
+      <li><a href="{% url 'thank_you' %}">Thank You</a></li>
     </ul>
   </header>
 
@@ -33,7 +34,7 @@
 
     <div class="image-wrapper">
       <img
-        src="assets/images/kate-ibragimova-iFQpqbLMOFU-unsplash.jpg"
+        src="{% static 'images/thi-nguyen-duc-_ORNfeiTOSg-unsplash.jpg' %}"
         alt="Customer vehicle being inspected"
         class="page-image"
       >
@@ -52,7 +53,7 @@
     </div>
 
     <div class="footer-right">
-      <img src="assets/images/5356237.jpg" alt="Car logo" class="footer-logo">
+      <img src="{% static 'images/5356237.jpg' %}" alt="Car logo" class="footer-logo">
     </div>
 
     <div class="footer-credits">
