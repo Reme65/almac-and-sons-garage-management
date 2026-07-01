@@ -28,7 +28,8 @@
 
   <div class="booking-content">
 
-    <form class="booking-form" action="{% url 'thank_you' %}" method="get">
+    <form action="{% url 'booking' %}" method="post" class="booking-form">
+      {% csrf_token %}
 
       <div class="form-group">
         <label for="name">Full Name *</label>
@@ -38,6 +39,11 @@
       <div class="form-group">
         <label for="email">Email Address *</label>
         <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+         <label for="phone">Phone Number *</label>
+         <input type="tel" id="phone" name="phone" required>
       </div>
 
       <div class="form-group">
