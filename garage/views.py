@@ -18,7 +18,7 @@ def booking(request):
         first_name = name_parts[0]
         last_name = name_parts[1] if len(name_parts) > 1 else ""
 
-        Booking.objects.create(
+        booking = Booking.objects.create(
             first_name=first_name,
             last_name=last_name,
             email=request.POST.get("email"),
@@ -28,7 +28,7 @@ def booking(request):
             service_required=request.POST.get("service"),
         )
 
-        return redirect("thank_you")
+        return render(request, "thank-you.html", {"booking": booking})
 
     return render(request, "booking.html")
 
