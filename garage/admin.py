@@ -1,5 +1,17 @@
 from django.contrib import admin
-from .models import Booking
+from .models import Booking, Customer, Vehicle
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ("first_name", "last_name", "email", "phone")
+    search_fields = ("first_name", "last_name", "email", "phone")
+
+
+@admin.register(Vehicle)
+class VehicleAdmin(admin.ModelAdmin):
+    list_display = ("registration", "make", "model", "year", "customer")
+    search_fields = ("registration", "make", "model", "customer__first_name", "customer__last_name")
+    list_filter = ("make", "year")
 
 
 @admin.register(Booking)
