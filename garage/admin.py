@@ -38,4 +38,14 @@ class BookingAdmin(admin.ModelAdmin):
         "booking_date",
     )
 
+    list_display = (
+        "first_name",
+        "last_name",
+        "vehicle_registration",
+        "vehicle",
+        "service_required",
+        "booking_date",
+        "status",
+    )
+  
     ordering = ("booking_date",)
