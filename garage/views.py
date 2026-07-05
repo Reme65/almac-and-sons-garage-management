@@ -18,17 +18,22 @@ def booking(request):
         first_name = name_parts[0]
         last_name = name_parts[1] if len(name_parts) > 1 else ""
 
-        booking = Booking.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            email=request.POST.get("email"),
-            phone=request.POST.get("phone"),
-            vehicle_registration=request.POST.get("reg"),
-            booking_date=request.POST.get("date"),
-            service_required=request.POST.get("service"),
-        )
+    vehicle = Vehicle.objects.filter(
+    registration=request.POST.get("reg")
+).first()
 
-        return render(request, "thank-you.html", {"booking": booking})
+    booking = Booking.objects.create(
+        vehicle=vehicle,
+        first_name=first_name,
+        last_name=last_name,
+        email=request.POST.get("email"),
+        phone=request.POST.get("phone"),
+        vehicle_registration=request.POST.get("reg"),
+        booking_date=request.POST.get("date"),
+        service_required=request.POST.get("service"),
+)    
+
+    return render(request, "thank-you.html", {"booking": booking})
 
     return render(request, "booking.html")
 

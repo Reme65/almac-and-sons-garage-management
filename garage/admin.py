@@ -18,18 +18,20 @@ class VehicleAdmin(admin.ModelAdmin):
 class BookingAdmin(admin.ModelAdmin):
     list_display = (
         "get_customer",
-        "vehicle",
         "vehicle_registration",
         "service_required",
         "booking_date",
         "status",
-  )
+    )
 
     search_fields = (
         "first_name",
         "last_name",
         "vehicle_registration",
         "email",
+        "vehicle__registration",
+        "vehicle__customer__first_name",
+        "vehicle__customer__last_name",
     )
 
     list_filter = (
@@ -38,21 +40,11 @@ class BookingAdmin(admin.ModelAdmin):
         "booking_date",
     )
 
-    list_display = (
-        "first_name",
-        "last_name",
-        "vehicle_registration",
-        "vehicle",
-        "service_required",
-        "booking_date",
-        "status",
-    )
-  
     ordering = ("booking_date",)
 
-def get_customer(self, obj):
-    if obj.vehicle and obj.vehicle.customer:
-        return obj.vehicle.customer
-    return f"{obj.first_name} {obj.last_name}"
+    def get_customer(self, obj):
+        if obj.vehicle and obj.vehicle.customer:
+            return obj.vehicle.customer
+        return f"{obj.first_name} {obj.last_name}"
 
-    get_customer.short_description = "Customer"   
+    get_customer.short_description = "Customer"
