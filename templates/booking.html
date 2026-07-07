@@ -26,6 +26,35 @@
   <p>Please fill out the form below to schedule your appointment.</p>
   <p>If we can't accommodate your preferred booking, a member of staff will contact you to re-schedule.</p>
 
+  <section class="registration-lookup">
+  <h3>Returning Customer?</h3>
+  <p>Enter the vehicle registration to check if the vehicle is already on the system.</p>
+
+  <form action="{% url 'booking' %}" method="get" class="lookup-form">
+    <div class="form-group">
+      <label for="lookup-reg">Vehicle Registration</label>
+      <input type="text" id="lookup-reg" name="lookup_reg" placeholder="e.g. CS15 REC">
+    </div>
+
+    <button type="submit">Find Vehicle</button>
+  </form>
+
+  {% if vehicle_found %}
+    <div class="lookup-result success">
+      <h3>Vehicle Found</h3>
+      <p><strong>Registration:</strong> {{ vehicle.registration }}</p>
+      <p><strong>Vehicle:</strong> {{ vehicle.make }} {{ vehicle.model }}</p>
+      <p><strong>Year:</strong> {{ vehicle.year }}</p>
+      <p><strong>Customer:</strong> {{ vehicle.customer }}</p>
+      <p><strong>Phone:</strong> {{ vehicle.customer.phone }}</p>
+    </div>
+  {% elif lookup_performed %}
+    <div class="lookup-result">
+      <p>No vehicle found for that registration. Please complete the booking form below.</p>
+    </div>
+  {% endif %}
+</section>
+
   <div class="booking-content">
 
     <form action="{% url 'booking' %}" method="post" class="booking-form">
@@ -33,37 +62,86 @@
 
       <div class="form-group">
         <label for="name">Full Name *</label>
-        <input type="text" id="name" name="name" required minlength="3">
+      <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          minlength="3"
+          value="{% if vehicle_found %}{{ vehicle.customer.first_name }} {{ vehicle.customer.last_name }}{% endif %}"
+          {% if vehicle_found %}readonly{% endif %}
+>
       </div>
 
       <div class="form-group">
         <label for="email">Email Address *</label>
-        <input type="email" id="email" name="email" required>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            value="{% if vehicle_found %}{{ vehicle.customer.email }}{% endif %}"
+            {% if vehicle_found %}readonly{% endif %}
+>
       </div>
 
       <div class="form-group">
          <label for="phone">Phone Number *</label>
-         <input type="tel" id="phone" name="phone" required>
+         <input
+             type="tel"
+             id="phone"
+             name="phone"
+             required
+             value="{% if vehicle_found %}{{ vehicle.customer.phone }}{% endif %}"
+             {% if vehicle_found %}readonly{% endif %}
+>
       </div>
 
       <div class="form-group">
         <label for="vehicle-reg">Registration Number</label>
-        <input type="text" id="vehicle-reg" name="reg" placeholder="e.g. AB12 CDE">
+        <input
+            type="text"
+            id="vehicle-reg"
+            name="reg"
+            value="{% if vehicle_found %}{{ vehicle.registration }}{% endif %}"
+            {% if vehicle_found %}readonly{% endif %}
+>
       </div>
 
       <div class="form-group">
         <label for="vehicle-make">Vehicle Make</label>
-        <input type="text" id="vehicle-make" name="make" placeholder="e.g. Ford">
+        <input
+            type="text"
+            id="vehicle-make"
+            name="make"
+            placeholder="e.g. Ford"
+            value="{% if vehicle_found %}{{ vehicle.make }}{% endif %}"
+            {% if vehicle_found %}readonly{% endif %}
+>
       </div>
 
       <div class="form-group">
         <label for="vehicle-model">Vehicle Model</label>
-        <input type="text" id="vehicle-model" name="model" placeholder="e.g. Focus">
+        <input
+            type="text"
+            id="vehicle-model"
+            name="model"
+            placeholder="e.g. Focus"
+            value="{% if vehicle_found %}{{ vehicle.model }}{% endif %}"
+            {% if vehicle_found %}readonly{% endif %}
+>
       </div>
 
       <div class="form-group">
         <label for="vehicle-year">Year</label>
-        <input type="text" id="vehicle-year" name="year" placeholder="e.g. 2019">
+        <input
+            type="text"
+            id="vehicle-year"
+            name="year"
+            placeholder="e.g. 2019"
+            value="{% if vehicle_found %}{{ vehicle.year }}{% endif %}"
+            {% if vehicle_found %}readonly{% endif %}
+>
       </div>
 
       <div class="form-group">
