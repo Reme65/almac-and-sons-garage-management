@@ -27,122 +27,94 @@
   <p>If we can't accommodate your preferred booking, a member of staff will contact you to re-schedule.</p>
 
   <section class="registration-lookup">
-  <h3>Returning Customer?</h3>
-  <p>Enter the vehicle registration to check if the vehicle is already on the system.</p>
+    <h3>Returning Customer?</h3>
+    <p>Enter the vehicle registration to check if the vehicle is already on the system.</p>
 
-  <form action="{% url 'booking' %}" method="get" class="lookup-form">
-    <div class="form-group">
-      <label for="lookup-reg">Vehicle Registration</label>
-      <input type="text" id="lookup-reg" name="lookup_reg" placeholder="e.g. CS15 REC">
-    </div>
+    <form action="{% url 'booking' %}" method="get" class="lookup-form">
+      <div class="form-group">
+        <label for="lookup-reg">Vehicle Registration</label>
+        <input type="text" id="lookup-reg" name="lookup_reg" placeholder="e.g. CS15 REC">
+      </div>
 
-    <button type="submit">Find Vehicle</button>
-  </form>
+      <button type="submit">Find Vehicle</button>
+    </form>
 
-  {% if vehicle_found %}
-    <div class="lookup-result success">
-      <h3>Vehicle Found</h3>
-      <p><strong>Registration:</strong> {{ vehicle.registration }}</p>
-      <p><strong>Vehicle:</strong> {{ vehicle.make }} {{ vehicle.model }}</p>
-      <p><strong>Year:</strong> {{ vehicle.year }}</p>
-      <p><strong>Customer:</strong> {{ vehicle.customer }}</p>
-      <p><strong>Phone:</strong> {{ vehicle.customer.phone }}</p>
-    </div>
-  {% elif lookup_performed %}
-    <div class="lookup-result">
-      <p>No vehicle found for that registration. Please complete the booking form below.</p>
-    </div>
-  {% endif %}
-</section>
+    {% if vehicle_found %}
+      <div class="customer-summary-card">
+        <h3>✓ Returning Customer</h3>
+
+        <div class="summary-grid">
+          <div>
+            <h4>Customer</h4>
+            <p>{{ vehicle.customer.first_name }} {{ vehicle.customer.last_name }}</p>
+            <p>{{ vehicle.customer.phone }}</p>
+            <p>{{ vehicle.customer.email }}</p>
+          </div>
+
+          <div>
+            <h4>Vehicle</h4>
+            <p>{{ vehicle.registration }}</p>
+            <p>{{ vehicle.make }} {{ vehicle.model }}</p>
+            <p>{{ vehicle.year }}</p>
+          </div>
+        </div>
+      </div>
+    {% elif lookup_performed %}
+      <div class="lookup-result">
+        <p>No vehicle found for that registration. Please complete the booking form below.</p>
+      </div>
+    {% endif %}
+  </section>
 
   <div class="booking-content">
 
     <form action="{% url 'booking' %}" method="post" class="booking-form">
       {% csrf_token %}
 
-      <div class="form-group">
-        <label for="name">Full Name *</label>
-      <input
-          type="text"
-          id="name"
-          name="name"
-          required
-          minlength="3"
-          value="{% if vehicle_found %}{{ vehicle.customer.first_name }} {{ vehicle.customer.last_name }}{% endif %}"
-          {% if vehicle_found %}readonly{% endif %}
->
-      </div>
+      {% if not vehicle_found %}
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" required minlength="3">
+        </div>
 
-      <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value="{% if vehicle_found %}{{ vehicle.customer.email }}{% endif %}"
-            {% if vehicle_found %}readonly{% endif %}
->
-      </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
 
-      <div class="form-group">
-         <label for="phone">Phone Number *</label>
-         <input
-             type="tel"
-             id="phone"
-             name="phone"
-             required
-             value="{% if vehicle_found %}{{ vehicle.customer.phone }}{% endif %}"
-             {% if vehicle_found %}readonly{% endif %}
->
-      </div>
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
 
-      <div class="form-group">
-        <label for="vehicle-reg">Registration Number</label>
-        <input
-            type="text"
-            id="vehicle-reg"
-            name="reg"
-            value="{% if vehicle_found %}{{ vehicle.registration }}{% endif %}"
-            {% if vehicle_found %}readonly{% endif %}
->
-      </div>
+        <div class="form-group">
+          <label for="vehicle-reg">Registration Number</label>
+          <input type="text" id="vehicle-reg" name="reg" placeholder="e.g. AB12 CDE">
+        </div>
 
-      <div class="form-group">
-        <label for="vehicle-make">Vehicle Make</label>
-        <input
-            type="text"
-            id="vehicle-make"
-            name="make"
-            placeholder="e.g. Ford"
-            value="{% if vehicle_found %}{{ vehicle.make }}{% endif %}"
-            {% if vehicle_found %}readonly{% endif %}
->
-      </div>
+        <div class="form-group">
+          <label for="vehicle-make">Vehicle Make</label>
+          <input type="text" id="vehicle-make" name="make" placeholder="e.g. Ford">
+        </div>
 
-      <div class="form-group">
-        <label for="vehicle-model">Vehicle Model</label>
-        <input
-            type="text"
-            id="vehicle-model"
-            name="model"
-            placeholder="e.g. Focus"
-            value="{% if vehicle_found %}{{ vehicle.model }}{% endif %}"
-            {% if vehicle_found %}readonly{% endif %}
->
-      </div>
+        <div class="form-group">
+          <label for="vehicle-model">Vehicle Model</label>
+          <input type="text" id="vehicle-model" name="model" placeholder="e.g. Focus">
+        </div>
 
-      <div class="form-group">
-        <label for="vehicle-year">Year</label>
-        <input
-            type="text"
-            id="vehicle-year"
-            name="year"
-            placeholder="e.g. 2019"
-            value="{% if vehicle_found %}{{ vehicle.year }}{% endif %}"
-            {% if vehicle_found %}readonly{% endif %}
->
-      </div>
+        <div class="form-group">
+          <label for="vehicle-year">Year</label>
+          <input type="text" id="vehicle-year" name="year" placeholder="e.g. 2019">
+        </div>
+      {% else %}
+        <input type="hidden" name="name" value="{{ vehicle.customer.first_name }} {{ vehicle.customer.last_name }}">
+        <input type="hidden" name="email" value="{{ vehicle.customer.email }}">
+        <input type="hidden" name="phone" value="{{ vehicle.customer.phone }}">
+        <input type="hidden" name="reg" value="{{ vehicle.registration }}">
+        <input type="hidden" name="make" value="{{ vehicle.make }}">
+        <input type="hidden" name="model" value="{{ vehicle.model }}">
+        <input type="hidden" name="year" value="{{ vehicle.year }}">
+      {% endif %}
 
       <div class="form-group">
         <label for="service">Service Required *</label>
@@ -166,22 +138,20 @@
     </form>
 
     <div class="booking-image">
-  <img
-    src="{% static 'images/male-customer-auto-service-center-explaning-problems-his-car-mechanic-with-clipboard.jpg' %}"
-    alt="Customer vehicle being inspected"
-    class="page-image"
-  >
-</div>
-</div>
+      <img
+        src="{% static 'images/male-customer-auto-service-center-explaning-problems-his-car-mechanic-with-clipboard.jpg' %}"
+        alt="Customer vehicle being inspected"
+        class="page-image"
+      >
+    </div>
+  </div>
 
-<section class="contact-details">
-  <h2>Contact Details</h2>
-  <p><strong>Phone:</strong> 01234 567890</p>
-  <p><strong>Email:</strong> info@almacandsons.co.uk</p>
-  <p><strong>Address:</strong> Example Garage Address</p>
-</section>
-
-
+  <section class="contact-details">
+    <h2>Contact Details</h2>
+    <p><strong>Phone:</strong> 01234 567890</p>
+    <p><strong>Email:</strong> info@almacandsons.co.uk</p>
+    <p><strong>Address:</strong> Example Garage Address</p>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -210,31 +180,6 @@
 </footer>
 
 <script>
-/* ==========================
-   AUTO-FILL VEHICLE DETAILS
-========================== */
-const params = new URLSearchParams(window.location.search);
-
-const reg = params.get("reg");
-const make = params.get("make");
-const model = params.get("model");
-const year = params.get("year");
-
-const regField = document.getElementById("vehicle-reg");
-const makeField = document.getElementById("vehicle-make");
-const modelField = document.getElementById("vehicle-model");
-const yearField = document.getElementById("vehicle-year");
-
-if (reg && regField) regField.value = reg;
-if (make && makeField) makeField.value = make;
-if (model && modelField) modelField.value = model;
-if (year && yearField) yearField.value = year;
-</script>
-
-<script>
-/* ==========================
-   PREVENT PAST DATE CHOICE
-========================== */
 const dateInput = document.getElementById("date");
 const today = new Date().toISOString().split("T")[0];
 dateInput.setAttribute("min", today);
