@@ -434,3 +434,37 @@ button:hover {
     text-align: center;
   }
 }
+
+/* ==========================
+   RECEPTION DASHBOARD
+========================== */
+
+.dashboard-header {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.dashboard-section {
+  margin: 40px auto;
+  max-width: 1000px;
+}
+
+.dashboard-section h3 {
+  background: #003366;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.booking-card {
+  background: #ffffff;
+  border-left: 6px solid #003366;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+
+.booking-card p {
+  margin: 6px 0;
+}

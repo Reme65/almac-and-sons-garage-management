@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import Booking, Customer, Vehicle
 
 
@@ -86,6 +86,22 @@ def booking(request):
             "lookup_performed": lookup_performed,
         },
     )
+
+def dashboard(request):
+    bookings = Booking.objects.select_related(
+        "vehicle",
+        "vehicle__customer",
+    ).order_by("booking_date")
+
+    context = {
+        "pending_bookings": bookings.filter(status="pending"),
+        "confirmed_bookings": bookings.filter(status="confirmed"),
+        "in_progress_bookings": bookings.filter(status="in_progress"),
+        "completed_bookings": bookings.filter(status="completed"),
+        "cancelled_bookings": bookings.filter(status="cancelled"),
+    }
+
+    return render(request, "dashboard.html", context)  
     
 def thank_you(request):
     return render(request, "thank-you.html")

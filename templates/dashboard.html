@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reception Dashboard | Almac & Sons Vehicle Services</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
+</head>
+<body>
+
+<header class="navbar">
+  <h1>Almac & Sons Vehicle Services</h1>
+
+  <input type="checkbox" id="menu-checkbox" hidden>
+  <label for="menu-checkbox" class="menu-toggle">☰</label>
+
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'services' %}">Services</a></li>
+    <li><a href="{% url 'booking' %}">Booking & Contact</a></li>
+    <li><a href="{% url 'dashboard' %}">Reception Dashboard</a></li>
+  </ul>
+</header>
+
+<main>
+  <section class="dashboard-header">
+    <h2>Reception Dashboard</h2>
+    <p>View current bookings grouped by status.</p>
+  </section>
+
+  <section class="dashboard-section">
+    <h3>Pending</h3>
+
+    {% for booking in pending_bookings %}
+      <article class="booking-card">
+        <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
+        <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
+        <p><strong>Service:</strong> {{ booking.service_required }}</p>
+        <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+      </article>
+    {% empty %}
+      <p>No pending bookings.</p>
+    {% endfor %}
+  </section>
+
+  <section class="dashboard-section">
+    <h3>Confirmed</h3>
+
+    {% for booking in confirmed_bookings %}
+      <article class="booking-card">
+        <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
+        <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
+        <p><strong>Service:</strong> {{ booking.service_required }}</p>
+        <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+      </article>
+    {% empty %}
+      <p>No confirmed bookings.</p>
+    {% endfor %}
+  </section>
+
+  <section class="dashboard-section">
+    <h3>In Progress</h3>
+
+    {% for booking in in_progress_bookings %}
+      <article class="booking-card">
+        <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
+        <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
+        <p><strong>Service:</strong> {{ booking.service_required }}</p>
+        <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+      </article>
+    {% empty %}
+      <p>No bookings in progress.</p>
+    {% endfor %}
+  </section>
+
+  <section class="dashboard-section">
+    <h3>Completed</h3>
+
+    {% for booking in completed_bookings %}
+      <article class="booking-card">
+        <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
+        <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
+        <p><strong>Service:</strong> {{ booking.service_required }}</p>
+        <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+      </article>
+    {% empty %}
+      <p>No completed bookings.</p>
+    {% endfor %}
+  </section>
+
+  <section class="dashboard-section">
+    <h3>Cancelled</h3>
+
+    {% for booking in cancelled_bookings %}
+      <article class="booking-card">
+        <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
+        <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
+        <p><strong>Service:</strong> {{ booking.service_required }}</p>
+        <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+      </article>
+    {% empty %}
+      <p>No cancelled bookings.</p>
+    {% endfor %}
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-center">
+    <p>&copy; 2026 Almac & Sons Vehicle Services</p>
+  </div>
+</footer>
+
+</body>
+</html>
