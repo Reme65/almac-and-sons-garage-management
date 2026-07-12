@@ -468,3 +468,23 @@ button:hover {
 .booking-card p {
   margin: 6px 0;
 }
+
+.pending-card {
+    border-left-color: #f0ad4e;
+}
+
+.confirmed-card {
+    border-left-color: #28a745;
+}
+
+.in-progress-card {
+    border-left-color: #007bff;
+}
+
+.completed-card {
+    border-left-color: #155724;
+}
+
+.cancelled-card {
+    border-left-color: #dc3545;
+}

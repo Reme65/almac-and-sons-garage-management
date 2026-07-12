@@ -31,10 +31,10 @@
   </section>
 
   <section class="dashboard-section">
-    <h3>Pending</h3>
+    <h3>Pending ({{ pending_bookings|length }})</h3>
 
     {% for booking in pending_bookings %}
-      <article class="booking-card">
+      <article class="booking-card pending-card">
         <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
         <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
         <p><strong>Service:</strong> {{ booking.service_required }}</p>
@@ -46,10 +46,10 @@
   </section>
 
   <section class="dashboard-section">
-    <h3>Confirmed</h3>
+    <h3>Confirmed ({{ confirmed_bookings|length }})</h3>
 
     {% for booking in confirmed_bookings %}
-      <article class="booking-card">
+      <article class="booking-card confirmed-card">
         <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
         <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
         <p><strong>Service:</strong> {{ booking.service_required }}</p>
@@ -61,10 +61,10 @@
   </section>
 
   <section class="dashboard-section">
-    <h3>In Progress</h3>
+    <h3>In Progress ({{ in_progress_bookings|length }})</h3>
 
     {% for booking in in_progress_bookings %}
-      <article class="booking-card">
+      <article class="booking-card in-progress-card">
         <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
         <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
         <p><strong>Service:</strong> {{ booking.service_required }}</p>
@@ -76,10 +76,10 @@
   </section>
 
   <section class="dashboard-section">
-    <h3>Completed</h3>
+    <h3>Completed ({{ completed_bookings|length }})</h3>
 
     {% for booking in completed_bookings %}
-      <article class="booking-card">
+      <article class="booking-card completed-card">
         <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
         <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
         <p><strong>Service:</strong> {{ booking.service_required }}</p>
@@ -91,10 +91,10 @@
   </section>
 
   <section class="dashboard-section">
-    <h3>Cancelled</h3>
+    <h3>Cancelled ({{ cancelled_bookings|length }})</h3>
 
     {% for booking in cancelled_bookings %}
-      <article class="booking-card">
+      <article class="booking-card cancelled-card">
         <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
         <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
         <p><strong>Service:</strong> {{ booking.service_required }}</p>
