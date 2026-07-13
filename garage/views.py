@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils import timezone
 from .models import Booking, Customer, Vehicle
 
 
@@ -88,12 +89,18 @@ def booking(request):
     )
 
 def dashboard(request):
+    today = timezone.localdate()
+
     bookings = Booking.objects.select_related(
         "vehicle",
         "vehicle__customer",
     ).order_by("booking_date")
 
+    todays_bookings = bookings.filter(booking_date=today)
+
     context = {
+        "today": today,
+        "todays_bookings": todays_bookings,
         "pending_bookings": bookings.filter(status="pending"),
         "confirmed_bookings": bookings.filter(status="confirmed"),
         "in_progress_bookings": bookings.filter(status="in_progress"),

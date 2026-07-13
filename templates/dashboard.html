@@ -30,6 +30,22 @@
     <p>View current bookings grouped by status.</p>
   </section>
 
+  <section class="dashboard-section todays-diary">
+  <h3>Today's Diary ({{ todays_bookings|length }})</h3>
+  <p>{{ today|date:"l, j F Y" }}</p>
+
+  {% for booking in todays_bookings %}
+    <article class="booking-card">
+      <p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
+      <p><strong>Customer:</strong> {{ booking.vehicle.customer }}</p>
+      <p><strong>Service:</strong> {{ booking.service_required }}</p>
+      <p><strong>Status:</strong> {{ booking.get_status_display }}</p>
+    </article>
+  {% empty %}
+    <p>No bookings scheduled for today.</p>
+  {% endfor %}
+</section>
+
   <section class="dashboard-section">
     <h3>Pending ({{ pending_bookings|length }})</h3>
 
