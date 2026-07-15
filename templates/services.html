@@ -34,47 +34,44 @@
   </ul>
 
   <section class="vehicle-search">
-    <h2>Find Your Vehicle</h2>
+  <h2>Find Your Vehicle</h2>
 
-    <div class="vehicle-search-grid">
+  <p>
+    Enter your registration number to check whether your vehicle is already
+    registered with the garage.
+  </p>
 
-      <!-- Registration Search -->
-      <div class="search-left">
-        <form id="vehicle-form">
-          <label for="reg">Registration Number</label>
-          <input
-            type="text"
-            id="reg"
-            name="registration"
-            placeholder="e.g. AB12CDE"
-            required
-          >
-          <button type="submit">Search Vehicle</button>
-        </form>
-      </div>
+  <div class="vehicle-search-grid">
+    <div class="search-left">
+      <form action="{% url 'booking' %}" method="get">
+        <label for="service-reg">Registration Number</label>
 
-      <!-- Manual Search -->
-      <div class="search-right">
-        <label for="make">Make</label>
-        <select id="make" name="make">
-          <option value="">-- Select Make --</option>
-        </select>
+        <input
+          type="text"
+          id="service-reg"
+          name="lookup_reg"
+          placeholder="e.g. AB12 CDE"
+          required
+        >
 
-        <label for="model">Model</label>
-        <select id="model" name="model">
-          <option value="">-- Select Model --</option>
-        </select>
-
-        <label for="year">Year</label>
-        <input type="number" id="year" name="year" placeholder="e.g. 2019" min="1980" max="2026">
-
-        <button type="button" id="manual-search-btn">Use Manual Vehicle Details</button>
-      </div>
-
+        <button type="submit">Find Vehicle</button>
+      </form>
     </div>
 
-    <div id="vehicle-results" class="vehicle-results"></div>
-  </section>
+    <div class="search-right">
+      <h3>Vehicle Not Registered?</h3>
+
+      <p>
+        You can continue to the booking page and enter the customer and vehicle
+        details manually.
+      </p>
+
+      <a href="{% url 'booking' %}" class="button-link">
+        Book a Service
+      </a>
+    </div>
+  </div>
+</section>
 
   <div class="image-wrapper">
     <img

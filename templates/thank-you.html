@@ -3,22 +3,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thank You | Almac & Sons Vehicle Services</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
 </head>
 <body>
 
-<h1>Thank you, {{ booking.first_name }}!</h1>
+<header class="navbar">
+  <h1>Almac & Sons Vehicle Services</h1>
 
-<p>Your booking request has been received.</p>
+  <input type="checkbox" id="menu-checkbox" hidden>
+  <label for="menu-checkbox" class="menu-toggle">☰</label>
 
-<p><strong>Registration:</strong> {{ booking.vehicle_registration }}</p>
-<p><strong>Service:</strong> {{ booking.service_required }}</p>
-<p><strong>Preferred Date:</strong> {{ booking.booking_date }}</p>
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'services' %}">Services</a></li>
+    <li><a href="{% url 'booking' %}">Booking & Contact</a></li>
+    <li><a href="{% url 'dashboard' %}">Reception Dashboard</a></li>
+  </ul>
+</header>
 
-<p>We will contact you shortly to confirm your appointment.</p>
+<main>
+  <section class="booking-summary">
+    <h2>Thank You, {{ booking.first_name }}!</h2>
 
-<a href="{% url 'home' %}">Return to Home</a>
+    <p>Your booking request has been received.</p>
+
+    <div id="summary-content">
+      <p>
+        <strong>Registration:</strong>
+        {{ booking.vehicle_registration }}
+      </p>
+
+      <p>
+        <strong>Service:</strong>
+        {{ booking.service_required }}
+      </p>
+
+      <p>
+        <strong>Preferred Date:</strong>
+        {{ booking.booking_date }}
+      </p>
+    </div>
+
+    <p>
+      We will contact you shortly to confirm your appointment.
+    </p>
+
+    <a href="{% url 'home' %}" class="button-link">
+      Return to Home
+    </a>
+  </section>
+
+  <div class="image-wrapper">
+    <img
+      src="{% static 'images/male-customer-auto-service-center-explaning-problems-his-car-mechanic-with-clipboard.jpg' %}"
+      alt="Customer speaking with a mechanic at the service centre"
+      class="page-image"
+    >
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-left">
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">X</a>
+  </div>
+
+  <div class="footer-center">
+    <p>&copy; 2026 Almac & Sons Vehicle Services</p>
+  </div>
+
+  <div class="footer-right">
+    <img
+      src="{% static 'images/5356237.jpg' %}"
+      alt="Car logo"
+      class="footer-logo"
+    >
+  </div>
+
+  <div class="footer-credits">
+    Images courtesy of
+    <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">Unsplash</a>
+    and
+    <a href="https://www.freepik.com/" target="_blank" rel="noopener noreferrer">Freepik</a>.
+    Favicon from
+    <a href="https://favicon.io/" target="_blank" rel="noopener noreferrer">favicon.io</a>.
+  </div>
+</footer>
 
 </body>
 </html>

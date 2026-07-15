@@ -85,7 +85,7 @@ main h3 {
 .hero-image img,
 .service-image img {
   width: 100%;
-  height: calc(100vh - 150px);
+  aspect-ratio: 16/9;
   object-fit: cover;
   border-radius: 5px;
   display: block;
@@ -101,7 +101,7 @@ main h3 {
   .page-image,
   .hero-image img,
   .service-image img {
-    height: 30vh;
+   width: 100%
   }
 }
 
