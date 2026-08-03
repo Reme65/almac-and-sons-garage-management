@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Booking, Customer, Vehicle
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -88,6 +89,7 @@ def booking(request):
         },
     )
 
+@login_required
 def dashboard(request):
     today = timezone.localdate()
 
@@ -108,7 +110,6 @@ def dashboard(request):
         "cancelled_bookings": bookings.filter(status="cancelled"),
     }
 
-    return render(request, "dashboard.html", context)  
+    return render(request, "dashboard.html", context)
+
     
-def thank_you(request):
-    return render(request, "thank-you.html")

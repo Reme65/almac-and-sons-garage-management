@@ -20,7 +20,9 @@
     <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'services' %}">Services</a></li>
     <li><a href="{% url 'booking' %}">Booking & Contact</a></li>
-    <li><a href="{% url 'dashboard' %}">Reception Dashboard</a></li>
+    {% if user.is_authenticated %}
+  <li><a href="{% url 'dashboard' %}">Reception Dashboard</a></li>
+{% endif %}
   </ul>
 </header>
 
